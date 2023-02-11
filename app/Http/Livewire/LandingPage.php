@@ -3,11 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Menus;
-use App\Models\User;
-use App\Models\EventM;
-use App\Models\LandingPageM;
-use App\Models\AksesMenu;
+// use App\Models\Menus;
+// use App\Models\User;
+// use App\Models\EventM;
+// use App\Models\LandingPageM;
+// use App\Models\AksesMenu;
 use Illuminate\Support\Facades\Auth;
 
 class LandingPage extends Component
@@ -36,25 +36,25 @@ class LandingPage extends Component
 
     public function render()
     {
-        $segment = strtolower($this->segment);
+        // $segment = strtolower($this->segment);
 
-        $menu = Menus::select('id')->where('url', $segment)->first();
-        $this->menuId = $menu->id;
+        // $menu = Menus::select('id')->where('url', $segment)->first();
+        // $this->menuId = $menu->id;
 
-        $access = AksesMenu::where('level_user_id', Auth::user()
-                    ->level_user_id)
-                    ->where('menu_id', $this->menuId)
-                    ->first();
+        // $access = AksesMenu::where('level_user_id', Auth::user()
+        //             ->level_user_id)
+        //             ->where('menu_id', $this->menuId)
+        //             ->first();
 
-        $this->isRead = $access->akses;
-        $this->isEdit = $access->edit;
-        $this->isDelete = $access->hapus;
-        $this->isCreate = $access->tambah;
+        // $this->isRead = $access->akses;
+        // $this->isEdit = $access->edit;
+        // $this->isDelete = $access->hapus;
+        // $this->isCreate = $access->tambah;
 
 
-        $data = LandingPageM::paginate(5);
+        // $data = LandingPageM::paginate(5);
         return view('livewire.landingpage.landingpage', [
-            'data'=>$data
+            // 'data'=>$data
         ]);
     }
 }
