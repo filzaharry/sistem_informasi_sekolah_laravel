@@ -161,11 +161,6 @@ class UserLevel extends Component
 
         return view('livewire.konfigurasi.userlevel.userlevel', [
             'data' => $data,
-            'isRead' => $this->isRead,
-            'isEdit' => $this->isEdit,
-            'isDelete' => $this->isDelete,
-            'isCreate' => $this->isCreate,
-            'title' =>$this->title
         ]);
     }
 }

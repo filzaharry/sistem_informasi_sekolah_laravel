@@ -92,8 +92,12 @@ class Genparams extends Component
 
     public function showModalAdd()
     {
-        $this->nameLevel = '';
         $this->dispatchBrowserEvent('show-form-add');
+    }
+
+    public function showModalFilter()
+    {
+        $this->dispatchBrowserEvent('show-form-filter');
     }
 
 
@@ -162,11 +166,6 @@ class Genparams extends Component
 
         return view('livewire.konfigurasi.genparams.genparams', [
             'data' => $data,
-            'isRead' => $this->isRead,
-            'isEdit' => $this->isEdit,
-            'isDelete' => $this->isDelete,
-            'isCreate' => $this->isCreate,
-            'title' =>$this->title
         ]);
     }
 }

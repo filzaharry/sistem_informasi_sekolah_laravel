@@ -27,8 +27,9 @@
   padding-right: 100px !important;
 }
 
-.custom-height {
-  height: 400px;
+.carousel-img-height {
+  height: 600px;
+  background-color: #0a4191;
   /* object-fit: contain; */
   object-fit: cover;
 }

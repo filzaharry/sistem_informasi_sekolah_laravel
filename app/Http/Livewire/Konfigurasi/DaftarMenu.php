@@ -182,11 +182,6 @@ class DaftarMenu extends Component
         return view('livewire.konfigurasi.daftarmenu.daftarmenu', [
             'data' => $data,
             'iconList' => $iconList,
-            'isRead' => $this->isRead,
-            'isEdit' => $this->isEdit,
-            'isDelete' => $this->isDelete,
-            'isCreate' => $this->isCreate,
-            'title' =>$this->title
         ]);
     }
 }

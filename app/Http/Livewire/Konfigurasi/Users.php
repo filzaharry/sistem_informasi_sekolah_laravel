@@ -10,7 +10,6 @@ use App\Models\AksesMenu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Jobs\TestJob;
 
 class Users extends Component
 {
@@ -123,6 +122,11 @@ class Users extends Component
         $this->dispatchBrowserEvent('show-form-add');
     }
 
+    public function showModalFilter()
+    {
+        $this->dispatchBrowserEvent('show-form-filter');
+    }
+
 
     public function addUser()
     {
@@ -184,15 +188,8 @@ class Users extends Component
             $data = User::whereRaw($this->searchFunc($this->search))->paginate(10);
         }
 
-        TestJob::dispatch($data->toArray());
-
         return view('livewire.konfigurasi.users.users', [
             'data' => $data,
-            'isRead' => $this->isRead,
-            'isEdit' => $this->isEdit,
-            'isDelete' => $this->isDelete,
-            'isCreate' => $this->isCreate,
-            'title' =>$this->title
         ]);
     }
 }

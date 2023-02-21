@@ -3,68 +3,85 @@
         <div class=" my-4">
             <div class="p-4">
 
-                @if ($isCreate == 1)
-                    <button wire:click.prevent="showModalAdd" href="" class="btn btn-primary">Add</button>
-                    @include('livewire.konfigurasi.userlevel.add')
-                @endif
+                <div class="row pb-4">
+                    <div class="col-lg-6">
 
-                <div class="col-sm-12 col-md-6" style="float: right;">
-                    <div id="example1_filter" class="dataTables_filter">
-                        <input wire:model="search" type="search" class="form-control form-control"
-                            placeholder="Search ...">
+                        @if ($isCreate == 1)
+                            <a wire:click.prevent="showModalAdd" class="btn btn-outline-success btn-sm" type="button">Add</a>
+                        @endif
+                        
+                        <a wire:click.prevent="showModalFilter" class="btn btn-outline-success btn-sm" type="button">Filter</a>
+                        
+                    </div>
+                    <div class="col-lg-3 ml-auto">
+                        <input style="height: 35px;" wire:model="search" type="search"
+                            class="form-control-sm form-control" placeholder="Search ...">
                     </div>
                 </div>
 
-                <div class="card-body px-0 pb-2">
-                    <div class="table table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0" style="font-size: 13px;">
-                            <thead>
+                <div class="table-responsive border rounded p-1">
+                    <table class="table align-items-center justify-content-center mb-0" style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th class="font-weight-bolder">Name</th>
+                                <th class="font-weight-bolder ps-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $a)
                                 <tr>
-                                    <th class="font-weight-bolder">Name</th>
-                                    <th class="font-weight-bolder ps-2">Action</th>
+                                    <td>
+                                        {{ $a->nama_level_user }}
+                                    </td>
+                                    <td>
+
+                                        @if ($isDetail == 1)
+                                            <a href={{ route('menuaccess', [$a->id]) }} class="btn btn-outline-primary btn-sm">
+                                                <i class="icon-list"></i>
+                                            </a>
+                                        @endif
+                                        @if ($isEdit == 1)
+                                            <a wire:click.prevent="showModalEdit({{ $a }})"
+                                                href="" class="btn btn-outline-warning btn-sm">
+                                                <i class="icon-pencil"></i>
+                                            </a>
+                                            
+                                        @endif
+                                        @if ($isDelete == 1)
+                                            <a wire:click.prevent="showModalDelete({{ $a }})"
+                                                href="" class="btn btn-outline-danger btn-sm">
+                                                <i class="icon-trash"></i>
+                                            </a>
+                                           
+                                        @endif
+                                                
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $a)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-3">{{ $a->nama_level_user }}</div>
-                                        </td>
-                                        <td>
-
-                                            @if ($isDetail == 1)
-                                                <a href={{ route('menuaccess', [$a->id]) }}>
-                                                    <button class="btn btn-sm bg-primary">
-                                                        Access Menu
-                                                    </button>
-                                                </a>
-                                            @endif
-                                            @if ($isEdit == 1)
-                                                <button wire:click.prevent="showModalEdit({{ $a }})"
-                                                    href="" class="btn btn-sm btn-warning">Edit</button>
-                                                @include('livewire.konfigurasi.userlevel.edit')
-                                            @endif
-
-                                            @if ($isDelete == 1)
-                                                <button wire:click.prevent="showModalDelete({{ $a }})"
-                                                    href="" class="btn btn-sm btn-danger">Delete</button>
-                                                @include('livewire.konfigurasi.userlevel.delete')
-                                            @endif
-
-                                        </td>
-                                    </tr>
                                 @endforeach
-
+                                
                             </tbody>
                         </table>
-                        {{ $data->withQueryString()->links() }}
+                    </div>
+                    <div class="row mx-1">
+                        <div class="py-4" >
+                            <p class="text-bold">Showing <strong>{{ $data->firstItem() }}</strong> to
+                                <strong>{{ $data->lastItem() }}</strong> of
+                                <strong>{{ $data->total() }}</strong>
+                            </p>
+                        </div>
+    
+                        <div class="ml-auto pt-4">
+                            {{ $data->withQueryString()->links() }}
+                        </div>
                     </div>
                 </div>
+                
             </div>
-
         </div>
-    </div>
 </div>
+            
+@include('livewire.konfigurasi.userlevel.edit')
+@include('livewire.konfigurasi.userlevel.delete')
 
 <script>
     window.addEventListener('show-form-add', event => {

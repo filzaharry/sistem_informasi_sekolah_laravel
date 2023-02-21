@@ -84,7 +84,7 @@
             <div class="carousel-inner">
                 @foreach ($banner as $key => $b)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img class="d-block w-100 custom-height" src="{{ $b->value }}"
+                        <img class="d-block w-100 carousel-img-height" src="{{ $b->value }}"
                             alt="carousel{{ $key + 1 }}">
                     </div>
                 @endforeach
