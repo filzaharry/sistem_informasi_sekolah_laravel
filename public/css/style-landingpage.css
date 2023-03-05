@@ -177,24 +177,27 @@
 
 .shape-boxes1 {
   width: 200px;
-  position: absolute;
+  position: fixed;
   z-index: -1;
-  right: 200px;
-  bottom: 0px;
+  right: 100px;
+  bottom: 50px;
+  opacity: 10%;
 }
 
 .shape-boxes2 {
   width: 700px;
-  position: absolute;
+  position: fixed;
   z-index: -1;
-  right: 0px;
-  bottom: -2700px;
+  right: -200px;
+  top: -270px;
+  opacity: 10%;
 }
 
 .shape-group1 {
   width: 700px;
-  position: absolute;
+  position: fixed;
   z-index: -1;
-  left: -200px;
-  bottom: -820px;
+  left: 50px;
+  bottom: 120px;
+  opacity: 10%;
 }

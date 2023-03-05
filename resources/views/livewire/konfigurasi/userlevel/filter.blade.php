@@ -15,14 +15,14 @@
                         <div class="col-md-6">
                             <div class="input-group input-group-static my-3">
                                 <label>From Date</label>
-                                <input type="date" class="form-control" wire:model.defer="fromdate">
+                                <input type="date" class="form-control form-control-sm" wire:model.defer="fromdate">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="input-group input-group-static my-3">
                                 <label>To Date</label>
-                                <input type="date" class="form-control" wire:model.defer="todate">
+                                <input type="date" class="form-control form-control-sm" wire:model.defer="todate">
                             </div>
                         </div>
                     </div>

@@ -14,99 +14,192 @@
                     </div> --}}
 
 
-                    <div class="col">
+                    {{-- <div class="col">
                         <div class="dataTables_filter">
                             <input wire:model="search" type="search" class="form-control form-control-sm"
                                 placeholder="Search ">
                         </div>
+                    </div> --}}
+                    <div class="col-lg-3 ml-auto mb-4">
+                        <input style="height: 35px;" wire:model="search" type="search"
+                            class="form-control form-control-sm" placeholder="Search ...">
                     </div>
                 </div>
 
-                <div class="card-body px-0 pb-2">
-                    <div class="table table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0" style="font-size: 13px;">
-                            <thead>
-                                <tr>
-                                    <th class="font-weight-bolder">
-                                        {{-- <input type="checkbox" disabled> --}}
-                                        <input type="checkbox" wire:click.prevent="allRowChecked"
-                                            @if ($checkAllRow == true) checked @endif>
-                                    </th>
-                                    <th class="font-weight-bolder">Menu</th>
-                                    <th class="font-weight-bolder">Read</th>
-                                    <th class="font-weight-bolder">Create</th>
-                                    <th class="font-weight-bolder">Update</th>
-                                    <th class="font-weight-bolder">Delete</th>
-                                    <th class="font-weight-bolder">Export</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $a)
-                                    @if ($a->url == '')
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" disabled>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">{{ $a->name }}</div>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    @else
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox"
-                                                    wire:click.prevent="allChecked({{ $a }})"
-                                                    @if ($a->read == '1' && $a->create == '1' && $a->edit == '1' && $a->delete == '1' && $a->export == '1') checked @endif>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">{{ $a->name }}</div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">
-                                                    <input type="checkbox"
-                                                        @if ($a->read) checked @endif
-                                                        wire:click.prevent="readChecked({{ $a }})">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">
-                                                    <input type="checkbox"
-                                                        @if ($a->create) checked @endif
-                                                        wire:click.prevent="createChecked({{ $a }})">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">
-                                                    <input type="checkbox"
-                                                        @if ($a->edit) checked @endif
-                                                        wire:click.prevent="editChecked({{ $a }})">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">
-                                                    <input type="checkbox"
-                                                        @if ($a->delete) checked @endif
-                                                        wire:click.prevent="deleteChecked({{ $a }})">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-3">
-                                                    <input type="checkbox"
-                                                        @if ($a->export) checked @endif
-                                                        wire:click.prevent="exportChecked({{ $a }})">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
+                <div class="table-responsive border rounded p-1">
 
-                            </tbody>
-                        </table>
+                    <table class="table align-items-center justify-content-center mb-0" style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input type="checkbox" wire:click.prevent="allRowChecked"
+                                        @if ($checkAllRow == true) checked @endif>
+                                            <i class="input-helper"></i></label>
+                                    </div>
+                                </th>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label"> Menu</label>
+                                    </div>
+                                </th>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label"> Read</label>
+                                    </div>
+                                </th>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label"> Create</label>
+                                    </div>
+                                </th>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label"> Update</label>
+                                    </div>
+                                </th>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label"> Delete</label>
+                                    </div>
+                                </th>
+                                <th class="font-weight-bolder">
+                                    <div class="form-check">
+                                        <label class="form-check-label"> Export</label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $a)
+                                @if ($a->url == '')
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" disabled  style="position:relative;">
+                                                </label> <i class="input-helper"></i>
+                                            </div>
+                                        </td>
+                                        <td class="font-weight-bolder">
+                                            {{-- <div class="d-flex px-3"> --}}
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        {{ $a->nama }}
+                                                    </label>
+                                                </div>
+                                            {{-- </div> --}}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                <input type="checkbox"
+                                                    style="position:relative;"
+                                                    wire:click.prevent="allChecked({{ $a }})"
+                                                    @if (
+                                                    $a->akses == '1' && 
+                                                    $a->tambah == '1' && 
+                                                    $a->edit == '1' && 
+                                                    $a->hapus == '1' 
+                                                    && $a->export == '1'
+                                                    ) checked @endif>
+                                                    <i class="input-helper"></i>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-3">
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> 
+                                                        {{ $a->nama }}
+                                                    </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-5">
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> 
+                                            
+                                                        <input style="position:relative;" type="checkbox"
+                                                            @if ($a->akses) checked @endif
+                                                            wire:click.prevent="readChecked({{ $a }})">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-5">
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> 
+                                            
+                                                        <input style="position:relative;" type="checkbox"
+                                                            @if ($a->tambah) checked @endif
+                                                            wire:click.prevent="createChecked({{ $a }})">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-5">
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> 
+                                            
+                                                        <input style="position:relative;" type="checkbox"
+                                                            @if ($a->edit) checked @endif
+                                                            wire:click.prevent="editChecked({{ $a }})">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-5">
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> 
+                                            
+                                                        <input style="position:relative;" type="checkbox"
+                                                            @if ($a->hapus) checked @endif
+                                                            wire:click.prevent="deleteChecked({{ $a }})">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-5">
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> 
+                                            
+                                                        <input style="position:relative;" type="checkbox"
+                                                            @if ($a->export) checked @endif
+                                                            wire:click.prevent="exportChecked({{ $a }})">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mx-1">
+                    <div class="py-4" >
+                        <p class="text-bold">Showing <strong>{{ $data->firstItem() }}</strong> to
+                            <strong>{{ $data->lastItem() }}</strong> of
+                            <strong>{{ $data->total() }}</strong>
+                        </p>
+                    </div>
+
+                    <div class="ml-auto pt-4">
                         {{ $data->withQueryString()->links() }}
                     </div>
                 </div>

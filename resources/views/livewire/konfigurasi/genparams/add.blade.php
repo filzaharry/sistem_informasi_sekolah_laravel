@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="param">General Parameter Name</label>
-                            <input type="text" class="form-control" id="nameParam" wire:model="nameParam">
+                            <input type="text" class="form-control form-control-sm" id="nameParam" wire:model="nameParam">
                             @error('nameParam')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label for="param">Value</label>
-                            <input type="text" class="form-control" id="valueParam" wire:model="valueParam">
+                            <input type="text" class="form-control form-control-sm" id="valueParam" wire:model="valueParam">
                             @error('valueParam')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label for="param">Type</label>
-                            <input type="number" class="form-control" id="typeParam" wire:model="typeParam">
+                            <input type="number" class="form-control form-control-sm" id="typeParam" wire:model="typeParam">
                             @error('typeParam')
                                 <p class="text-danger">
                                     {{ $message }}

@@ -14,14 +14,14 @@
                     aria-expanded="false">
                     <span class="font-weight-normal"> {{ Auth::user()->name }}</span></a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                    <div class="dropdown-header text-center">
-                        <img class="img-md rounded-circle" src="{{ asset('images/faces/face8.jpg') }}"
-                            alt="Profile image">
+                    <div class="dropdown-header">
+                        {{-- <img class="img-md rounded-circle" src="{{ asset('images/faces/face8.jpg') }}"
+                            alt="Profile image"> --}}
                         <p class="mb-1 mt-3">{{ Auth::user()->name }}</p>
                         <p class="font-weight-light text-muted mb-0">{{ Auth::user()->email }}</p>
                     </div>
-                    <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> My
-                        Profile</a>
+                    {{-- <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> My
+                        Profile</a> --}}
                     <a class="dropdown-item" wire:click="logoutUser"><i
                             class="dropdown-item-icon icon-power text-primary"></i>Sign
                         Out</a>

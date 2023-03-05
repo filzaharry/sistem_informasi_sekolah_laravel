@@ -47,6 +47,7 @@ class DaftarMenu extends Component
     public function showModalDelete($data)
     {
         $this->deleteId = $data['id'];
+        $this->masterMenuName = $data['nama_menu'];
         $this->dispatchBrowserEvent('show-form-delete');
     }
 
@@ -60,7 +61,7 @@ class DaftarMenu extends Component
 
         Menus::where('id', $this->deleteId)->delete();
 
-        session()->flash('success', 'Delete Menu has been Successfully!');
+        session()->flash('success', 'Berhasil menghapus data');
         $this->dispatchBrowserEvent('hide-form-delete');
 
         return redirect()->route('daftar-menu');
@@ -73,7 +74,7 @@ class DaftarMenu extends Component
         $this->masterMenuSort = $masterMenu['sort'];
         $this->masterMenuIcon = $masterMenu['icon'];
         $this->isParent = $masterMenu['is_parent'];
-        $this->masterMenuStatus = $masterMenu['aktif'];
+        $this->masterMenuStatus = $masterMenu['aktif'] == 'N' ? 0 : 1;
         $this->dispatchBrowserEvent('show-form-edit');
     }
 
@@ -119,7 +120,7 @@ class DaftarMenu extends Component
             'icon' => $this->masterMenuIcon,
             'aktif' => $this->masterMenuStatus == 1 ? "Y" : "N",
             'sort' => $this->masterMenuSort,
-            'is_parent' => is_null($this->isParent) ? 1 : 0,
+            'is_parent' => $this->isParent == true ? 1 : 0,
         ]);
 
         $getAllUserLevel = UserLevels::get();
@@ -129,6 +130,11 @@ class DaftarMenu extends Component
             AksesMenu::create([
                 'level_user_id' => $i->id,
                 'menu_id' => $getLastMenu->id,
+                'akses' => 0,
+                'tambah' => 0,
+                'edit' => 0,
+                'export' => 0,
+                'hapus' => 0,
             ]);
         }
 
@@ -171,9 +177,9 @@ class DaftarMenu extends Component
         $this->isCreate = $access->tambah;
 
         if($this->search == ''){
-            $data = Menus::where('level_menu', 'main_menu')->paginate(10);
+            $data = Menus::where('level_menu', 'main_menu')->orderBy('id','desc')->paginate(10);
         } else {
-            $data = Menus::where('level_menu', 'main_menu')->whereRaw($this->searchFunc($this->search))->paginate(10);
+            $data = Menus::where('level_menu', 'main_menu')->whereRaw($this->searchFunc($this->search))->orderBy('id','desc')->paginate(10);
         }
 
         $iconList = Icon::where('status', 1)->get();

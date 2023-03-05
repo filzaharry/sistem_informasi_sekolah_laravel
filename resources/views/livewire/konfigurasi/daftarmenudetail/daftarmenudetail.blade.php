@@ -15,12 +15,7 @@
     <section class="content">
         <div class="container-fluid">
 
-            @if (Session::has('success'))
-                <div class="alert alert-success" id="success-alert">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
-                    <strong>Success! </strong> {{ Session::get('success') }}
-                </div>
-            @endif
+            @include('livewire.alert')
 
             <!-- Main row -->
             <div class="row">

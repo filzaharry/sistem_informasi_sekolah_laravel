@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="nameLevel">Level User Name</label>
-                            <input type="text" class="form-control" id="nameLevel" wire:model="nameLevel">
+                            <input type="text" class="form-control form-control-sm" id="nameLevel" wire:model="nameLevel">
                             @error('nameLevel')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror

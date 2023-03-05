@@ -83,10 +83,10 @@ class Menuaccess extends Component
     public function allChecked($data)
     {
         if(
-            $data['read'] == 0 && 
-            $data['create'] == 0 &&
+            $data['akses'] == 0 && 
+            $data['tambah'] == 0 &&
             $data['edit'] == 0 &&
-            $data['delete'] == 0 &&
+            $data['hapus'] == 0 &&
             $data['export'] == 0 
             ){
             AksesMenu::where('id', $data['id'])->update([
@@ -97,10 +97,10 @@ class Menuaccess extends Component
                 'export' => 1
             ]);
         } elseif(
-            $data['read'] == 1 && 
-            $data['create'] == 1 &&
+            $data['akses'] == 1 && 
+            $data['tambah'] == 1 &&
             $data['edit'] == 1 &&
-            $data['delete'] == 1 &&
+            $data['hapus'] == 1 &&
             $data['export'] == 1 
         )  {
             AksesMenu::where('id', $data['id'])->update([
@@ -125,7 +125,7 @@ class Menuaccess extends Component
 
     public function readChecked($data)
     {
-        $this->readValue = $data['read'] == '1' ? '0' : '1';
+        $this->readValue = $data['akses'] == '1' ? '0' : '1';
 
         AksesMenu::where('id', $data['id'])->update([
             'akses' => $this->readValue
@@ -134,7 +134,7 @@ class Menuaccess extends Component
     }
     public function createChecked($data)
     {
-        $this->createValue = $data['create'] == '1' ? '0' : '1';
+        $this->createValue = $data['tambah'] == '1' ? '0' : '1';
 
         AksesMenu::where('id', $data['id'])->update([
             'tambah' => $this->createValue
@@ -152,7 +152,7 @@ class Menuaccess extends Component
     }
     public function deleteChecked($data)
     {
-        $this->deleteValue = $data['delete'] == '1' ? '0' : '1';
+        $this->deleteValue = $data['hapus'] == '1' ? '0' : '1';
 
         AksesMenu::where('id', $data['id'])->update([
             'hapus' => $this->deleteValue
@@ -183,12 +183,12 @@ class Menuaccess extends Component
     public function selectCustom()
     {
         $qry = "akses.id as id,
-            menu.nama_menu as name,
+            menu.nama_menu as nama,
             menu.url as url,
-            akses.akses as read,
-            akses.tambah as create,
+            akses.akses as akses,
+            akses.tambah as tambah,
             akses.edit as edit,
-            akses.hapus as delete,
+            akses.hapus as hapus,
             akses.export as export
         ";
 
@@ -206,14 +206,10 @@ class Menuaccess extends Component
     public function render()
     {
 
-        if($this->search == '' && is_null($this->getLevel)){
-            $data = Aksesmenu::selectRaw($this->selectCustom())->leftJoin('menu','akses.menu_id','=','menu.id')->orderBy('menu.id')->paginate(10);
-        } elseif($this->search == '' && $this->getLevel) {
-            $data = Aksesmenu::selectRaw($this->selectCustom())->leftJoin('menu','akses.menu_id','=','menu.id')->orderBy('menu.id')->where('akses.level_user_id', $this->getLevel)->paginate(10);
-        }else{
-            $data = Aksesmenu::selectRaw($this->selectCustom())->leftJoin('menu','akses.menu_id','=','menu.id')->orderBy('menu.id')->whereRaw($this->searchFunc($this->search))->paginate(10);
-        }
+        $data = Aksesmenu::selectRaw($this->selectCustom())->leftJoin('menu','akses.menu_id','=','menu.id')->orderBy('menu.sort', 'desc')->paginate(10);
+        // dd($data);
 
+        $allRow = Aksesmenu::count();
         $selectedAllRow = Aksesmenu::where('level_user_id', $this->getLevel)
                         ->where('akses',1)
                         ->where('tambah', 1)
@@ -222,7 +218,7 @@ class Menuaccess extends Component
                         ->where('export', 1)
                         ->count();
 
-        if ($selectedAllRow == count($data)) {
+        if ($selectedAllRow == $allRow) {
             $this->checkAllRow = true;
         }
 

@@ -13,6 +13,7 @@ class UserLevels extends Model
 
     protected $fillable = [
         'id',
-        'nama_level_user',
+        'nama',
+        'status',
     ];
 }

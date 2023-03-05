@@ -8,21 +8,21 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" wire:model="email">
+                            <input type="email" class="form-control form-control-sm" id="email" wire:model="email">
                             @error('email')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" wire:model="username">
+                            <input type="text" class="form-control form-control-sm" id="username" wire:model="username">
                             @error('username')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="fullname">Name</label>
-                            <input type="text" class="form-control" id="fullname" wire:model="fullname">
+                            <input type="text" class="form-control form-control-sm" id="fullname" wire:model="fullname">
                             @error('fullname')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" wire:model="password">
+                            <input type="password" class="form-control form-control-sm" id="password" wire:model="password">
                             @error('password')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -44,7 +44,7 @@
 
                         <div class="form-group">
                             <label for="repeatpassword">Repeat Password</label>
-                            <input type="password" class="form-control" id="repeatpassword" wire:model="repeatpassword">
+                            <input type="password" class="form-control form-control-sm" id="repeatpassword" wire:model="repeatpassword">
                             @error('repeatpassword')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror

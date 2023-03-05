@@ -25,7 +25,7 @@ class UserLevel extends Component
     public $isEdit;
     public $isDelete;
     public $isCreate;
-    public $isDetail;
+    public $isExport;
     public $nameLevel;
 
 
@@ -97,7 +97,7 @@ class UserLevel extends Component
         $this->validate();
 
         UserLevels::insert([
-            'nama_level_user' => $this->nameLevel,
+            'nama' => $this->nameLevel,
         ]);
 
         $dataMenu = Menus::get();
@@ -151,7 +151,7 @@ class UserLevel extends Component
         $this->isEdit = $access->edit;
         $this->isDelete = $access->hapus;
         $this->isCreate = $access->tambah;
-        $this->isDetail = $access->detail;
+        $this->isExport = $access->export;
 
         if($this->search == ''){
             $data = UserLevels::paginate(10);

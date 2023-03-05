@@ -3,69 +3,82 @@
         <div class=" my-4">
             <div class="p-4">
 
-                @if ($isCreate == 1)
-                    <button wire:click.prevent="showModalAdd" href="" class="btn btn-primary">Add</button>
-                    @include('livewire.konfigurasi.icons.add')
-                @endif
+                <div class="row pb-4">
+                    <div class="col-lg-6">
 
-                <div class="col-sm-12 col-md-6" style="float: right;">
-                    <div id="example1_filter" class="dataTables_filter">
-                        <input wire:model="search" type="search" class="form-control form-control"
-                            placeholder="Search ...">
+                        @if ($isCreate == 1)
+                            <button wire:click.prevent="showModalAdd" href="" class="btn btn-outline-success btn-sm">Add</button>
+                        @endif
+                        
+                        <a wire:click.prevent="showModalFilter" class="btn btn-outline-success btn-sm" type="button">Filter</a>
+                        
+                    </div>
+                    <div class="col-lg-3 ml-auto">
+                        <input style="height: 35px;" wire:model="search" type="search"
+                            class="form-control form-control-sm" placeholder="Search ...">
                     </div>
                 </div>
 
-                <div class="card-body px-0 pb-2">
-                    <div class="table table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0" style="font-size: 13px;">
-                            <thead>
+                
+                <div class="table-responsive border rounded p-1">
+                    <table class="table align-items-center justify-content-center mb-0" style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th class="font-weight-bolder">Icon</th>
+                                <th class="font-weight-bolder">Name</th>
+                                <th class="font-weight-bolder">Status</th>
+                                <th class="font-weight-bolder ps-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $a)
                                 <tr>
-                                    <th class="font-weight-bolder">Icon</th>
-                                    <th class="font-weight-bolder">Name</th>
-                                    <th class="font-weight-bolder">Status</th>
-                                    <th class="font-weight-bolder ps-2">Action</th>
+                                    <td>
+                                        <span class="btn btn-sm ">
+                                            <i class="{{ $a->code_icon }}"></i>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{ $a->name }}
+                                    </td>
+                                    <td>
+                                        <a
+                                            class="btn btn-sm @if ($a->status == '1') text-success @else text-secondary @endif ">
+                                            <i class="icon-check"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @if ($isEdit == 1)
+                                            <button wire:click.prevent="showModalEdit({{ $a }})"
+                                                href="" class="btn btn-sm btn-outline-warning">
+                                                <i class="icon-pencil"></i>
+                                            </button>
+                                            
+                                        @endif
+
+                                        @if ($isDelete == 1)
+                                            <button wire:click.prevent="showModalDelete({{ $a }})"
+                                                href="" class="btn btn-sm btn-outline-danger">
+                                                <i class="icon-trash"></i>
+                                            </button>
+                                        @endif
+
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $a)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-3">
-                                                    <button class="btn btn-sm bg-gradient-secondary">
-                                                        <i class="{{ $a->name }}"></i>
-                                                    </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-3">{{ $a->name }}</div>
-                                        </td>
-                                        <td>
-                                             <div class="d-flex px-3">
-                                                <button
-                                                    class="btn btn-sm @if ($a->status == '1') bg-gradient-success @else bg-gradient-secondary @endif ">
-                                                    <i class="fas fa-check"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            @if ($isEdit == 1)
-                                                <button wire:click.prevent="showModalEdit({{ $a }})"
-                                                    href="" class="btn btn-sm btn-warning">Edit</button>
-                                                @include('livewire.konfigurasi.icons.edit')
-                                            @endif
+                            @endforeach
 
-                                            @if ($isDelete == 1)
-                                                <button wire:click.prevent="showModalDelete({{ $a }})"
-                                                    href="" class="btn btn-sm btn-danger">Delete</button>
-                                                @include('livewire.konfigurasi.icons.delete')
-                                            @endif
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mx-1">
+                    <div class="py-4" >
+                        <p class="text-bold">Showing <strong>{{ $data->firstItem() }}</strong> to
+                            <strong>{{ $data->lastItem() }}</strong> of
+                            <strong>{{ $data->total() }}</strong>
+                        </p>
+                    </div>
 
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
+                    <div class="ml-auto pt-4">
                         {{ $data->withQueryString()->links() }}
                     </div>
                 </div>
@@ -74,6 +87,9 @@
         </div>
     </div>
 </div>
+@include('livewire.konfigurasi.icons.add')
+@include('livewire.konfigurasi.icons.edit')
+@include('livewire.konfigurasi.icons.delete')
 
 <script>
     window.addEventListener('show-form-add', event => {

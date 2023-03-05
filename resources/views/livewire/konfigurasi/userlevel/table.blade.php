@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-lg-3 ml-auto">
                         <input style="height: 35px;" wire:model="search" type="search"
-                            class="form-control-sm form-control" placeholder="Search ...">
+                            class="form-control form-control-sm" placeholder="Search ...">
                     </div>
                 </div>
 
@@ -24,6 +24,7 @@
                         <thead>
                             <tr>
                                 <th class="font-weight-bolder">Name</th>
+                                <th class="font-weight-bolder">Status</th>
                                 <th class="font-weight-bolder ps-2">Action</th>
                             </tr>
                         </thead>
@@ -31,15 +32,22 @@
                             @foreach ($data as $a)
                                 <tr>
                                     <td>
-                                        {{ $a->nama_level_user }}
+                                        {{ $a->nama }}
                                     </td>
                                     <td>
 
-                                        @if ($isDetail == 1)
-                                            <a href={{ route('menuaccess', [$a->id]) }} class="btn btn-outline-primary btn-sm">
-                                                <i class="icon-list"></i>
-                                            </a>
+                                        @if ($a->status == 0)
+                                           <i class="icon-check text-success"></i>
+                                        @elseif ($a->status == 1)
+                                           <i class="icon-check"></i>
                                         @endif
+                                                
+                                    </td>
+                                    <td>
+
+                                        <a href={{ route('menuaccess', [$a->id]) }} class="btn btn-outline-primary btn-sm">
+                                            <i class="icon-list"></i>
+                                        </a>
                                         @if ($isEdit == 1)
                                             <a wire:click.prevent="showModalEdit({{ $a }})"
                                                 href="" class="btn btn-outline-warning btn-sm">
@@ -80,6 +88,7 @@
         </div>
 </div>
             
+@include('livewire.konfigurasi.userlevel.add')
 @include('livewire.konfigurasi.userlevel.edit')
 @include('livewire.konfigurasi.userlevel.delete')
 

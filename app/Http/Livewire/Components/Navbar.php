@@ -17,6 +17,6 @@ class Navbar extends Component
         Auth::logout();
 
         session()->flash('success', 'you are logout success');
-        return redirect(route('login'));
+        return redirect(route('landing-page'));
     }
 }

@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="subMenuName">Sub Menu Name</label>
-                            <input type="text" class="form-control" id="subMenuName" wire:model="subMenuName">
+                            <input type="text" class="form-control form-control-sm" id="subMenuName" wire:model="subMenuName">
                             @error('subMenuName')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label for="subMenuSort">Sort Sub Menu</label>
-                            <input type="number" class="form-control" id="subMenuSort" wire:model="subMenuSort">
+                            <input type="number" class="form-control form-control-sm" id="subMenuSort" wire:model="subMenuSort">
                             @error('subMenuSort')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -28,17 +28,16 @@
                             <select class="custom-select" wire:model="subMenuIcon">
                                 <option value="" selected>Choose One</option>
                                 @foreach ($iconList as $icon)
-                                    <option value="{{ $icon->name }}"><i class="{{ $icon->name }}"></i>
-                                        {{ $icon->name }}</option>
+                                    <option value="{{ $icon->code_icon }}"><i class="{{ $icon->code_icon }}"></i>
+                                        {{ $icon->code_icon }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="subMenuStatus"
+                        <div class="form-check">
+                                <label for="subMenuStatus" class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="subMenuStatus"
                                     wire:model="subMenuStatus">
-                                <label for="subMenuStatus" class="custom-control-label">Active Status</label>
-                            </div>
+                                    Active Status <i class="input-helper"></i></label>
                         </div>
                     </div>
                 </div>

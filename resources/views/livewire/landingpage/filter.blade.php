@@ -7,11 +7,11 @@
                     <h4 class="card-title">Filter Landing Page</h4>
                     <div class="form-group">
                         <label for="fromdate">From Date</label>
-                        <input type="date" class="form-control" id="fromdate" wire:model="fromdate">
+                        <input type="date" class="form-control form-control-sm" id="fromdate" wire:model="fromdate">
                     </div>
                     <div class="form-group">
                         <label for="todate">To Date</label>
-                        <input type="date" class="form-control" id="todate" wire:model="todate">
+                        <input type="date" class="form-control form-control-sm" id="todate" wire:model="todate">
                     </div>
                     <button type="button" style="float: right;" class="btn btn-outline-primary btn-sm"
                         data-bs-dismiss="modal">Filter</button>

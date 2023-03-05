@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="subMenuName">Sub Menu Name</label>
-                            <input type="text" class="form-control" id="subMenuName" wire:model="subMenuName">
+                            <input type="text" class="form-control form-control-sm" id="subMenuName" wire:model="subMenuName">
                             @error('subMenuName')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label for="subMenuSort">Sort Menu</label>
-                            <input type="number" class="form-control" id="subMenuSort" wire:model="subMenuSort">
+                            <input type="number" class="form-control form-control-sm" id="subMenuSort" wire:model="subMenuSort">
                             @error('subMenuSort')
                                 <p class="text-danger">
                                     {{ $message }}

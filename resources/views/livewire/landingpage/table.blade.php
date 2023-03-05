@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-lg-3 ml-auto">
                         <input style="height: 35px;" wire:model="search" type="search"
-                            class="form-control-sm form-control" placeholder="Search ...">
+                            class="form-control form-control-sm" placeholder="Search ...">
                     </div>
                 </div>
 

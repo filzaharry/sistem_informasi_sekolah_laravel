@@ -127,6 +127,11 @@ class DaftarMenuDetail extends Component
             AksesMenu::create([
                 'level_user_id' => $i->id,
                 'menu_id' => $getLastMenu->id,
+                'akses' => 0,
+                'tambah' => 0,
+                'edit' => 0,
+                'export' => 0,
+                'hapus' => 0,
             ]);
         }
 

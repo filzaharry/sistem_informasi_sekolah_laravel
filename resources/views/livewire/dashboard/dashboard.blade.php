@@ -90,7 +90,7 @@
                         <div class="col-md-6 col-xl-4 d-flex align-items-center">
                             <div class="input-group" id="income-expense-summary-chart-daterange">
                                 <div class="inpu-group-prepend input-group-text"><i class="icon-calendar"></i></div>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control form-control-sm">
                                 <div class="input-group-prepend input-group-text"><i class="icon-arrow-down"></i>
                                 </div>
                             </div>
