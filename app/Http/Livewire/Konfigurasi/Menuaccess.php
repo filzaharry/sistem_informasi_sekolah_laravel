@@ -184,6 +184,7 @@ class Menuaccess extends Component
     {
         $qry = "akses.id as id,
             menu.nama_menu as nama,
+            menu.master_menu as master,
             menu.url as url,
             akses.akses as akses,
             akses.tambah as tambah,
@@ -199,15 +200,24 @@ class Menuaccess extends Component
     {
         $this->getLevel = $id;
         $qryGetNameLevel = UserLevels::find($id);
-        $this->userLevel = $qryGetNameLevel->nama_level_user;
+        
+        $this->userLevel = $qryGetNameLevel->nama;
     }
 
 
     public function render()
     {
 
-        $data = Aksesmenu::selectRaw($this->selectCustom())->leftJoin('menu','akses.menu_id','=','menu.id')->orderBy('menu.sort', 'desc')->paginate(10);
-        // dd($data);
+        $mainMenu = Aksesmenu::join('menu','menu.id','=','akses.menu_id')
+                ->select('menu.*','akses.akses','akses.tambah','akses.edit','akses.hapus')
+                ->where('akses.level_user_id', Auth::user()->level_user_id)
+                ->where('menu.level_menu', 'main_menu')
+                ->where('menu.aktif', 'Y')
+                ->where('akses', 1)
+                ->orderBy('sort', 'asc')
+                ->get();
+
+        $data = Aksesmenu::selectRaw($this->selectCustom())->leftJoin('menu','akses.menu_id','=','menu.id')->orderBy('menu.sort', 'desc')->get();
 
         $allRow = Aksesmenu::count();
         $selectedAllRow = Aksesmenu::where('level_user_id', $this->getLevel)
@@ -224,6 +234,7 @@ class Menuaccess extends Component
 
         return view('livewire.konfigurasi.menuaccess.menuaccess', [
             'checkAllRow' => $this->checkAllRow,
+            'mainMenu' => $mainMenu,
             'data' => $data,
             'title' =>$this->title,
             'userLevel' => $this->userLevel

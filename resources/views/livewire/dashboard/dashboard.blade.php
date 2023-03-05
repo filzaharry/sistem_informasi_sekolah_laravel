@@ -1,42 +1,10 @@
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-sm-flex align-items-baseline report-summary-header">
-                                <h5 class="font-weight-semibold">Report Summary</h5> <span class="ml-auto">Updated
-                                    Report</span> <button class="btn btn-icons border-0 p-2"><i
-                                        class="icon-refresh"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row report-inner-cards-wrapper">
-                        <div class=" col-md -6 col-xl report-inner-card">
-                            <div class="inner-card-text">
-                                <span class="report-title">TIKET TERJUAL</span>
-                                <h4>RP. 32.123.000.000,00 </h4>
-                                <span class="report-count"> 300 Terjual Hari Ini</span>
-                            </div>
-                            <div class="inner-card-icon bg-success">
-                                <i class="icon-rocket"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl report-inner-card">
-                            <div class="inner-card-text">
-                                <span class="report-title">TIKET BELUM DI APPROVE</span>
-                                <h4>100.000 Tiket</h4>
-                                <span class="report-count"> dari total 700.000 tiket</span>
-                            </div>
-                            <div class="inner-card-icon bg-danger">
-                                <i class="icon-pencil"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <span class="ml-auto">Updated Report</span> 
+            <a href="/" class="btn btn-icons border-0 p-2">
+                <i class="icon-refresh"></i>
+            </a>
         </div>
     </div>
 
@@ -47,14 +15,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-sm-flex align-items-baseline report-summary-header">
-                                <h5 class="font-weight-semibold">Data Tiket
-                                    Terjual</h5> <span class="ml-auto">Updated
-                                    Report</span> <button class="btn btn-icons border-0 p-2"><i
-                                        class="icon-refresh"></i></button>
+                                <h5 class="font-weight-semibold">Data Siswa Terdaftar</h5>
                             </div>
                         </div>
                         <div class="container">
-                            <canvas id="myChart"></canvas>
+                            <canvas id="allStudent"></canvas>
                         </div>
                     </div>
 
@@ -64,77 +29,110 @@
     </div>
 
 
-
-
-    {{--  TOTAL INCOME MASUK KE MENU REPORTING  --}}
-    {{-- <div class="row">
-        <div class="col-md-12 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row income-expense-summary-chart-text">
-                        <div class="col-xl-4">
-                            <h5>Income And Expenses Summary</h5>
-                            <p class="small text-muted">A comparison of people who mark themselves of their ineterest
-                                from the date range given above. Learn more.</p>
-                        </div>
-                        <div class=" col-md-3 col-xl-2">
-                            <p class="income-expense-summary-chart-legend"> <span style="border-color: #6469df"></span>
-                                Total Income </p>
-                            <h3>$ 1,766.00</h3>
-                        </div>
-                        <div class="col-md-3 col-xl-2">
-                            <p class="income-expense-summary-chart-legend"> <span style="border-color: #37ca32"></span>
-                                Total Expense </p>
-                            <h3>$ 5,698.30</h3>
-                        </div>
-                        <div class="col-md-6 col-xl-4 d-flex align-items-center">
-                            <div class="input-group" id="income-expense-summary-chart-daterange">
-                                <div class="inpu-group-prepend input-group-text"><i class="icon-calendar"></i></div>
-                                <input type="text" class="form-control form-control-sm">
-                                <div class="input-group-prepend input-group-text"><i class="icon-arrow-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
 </div>
 
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
+        var ctx = document.getElementById('allStudent').getContext("2d");
 
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45],
-            }]
-        };
+        var gradientStroke1 = ctx.createLinearGradient(500, 0,2100, 0);
+        gradientStroke1.addColorStop(0, '#0a0a7a');
+        gradientStroke1.addColorStop(1, '#f49080');
 
-        const config = {
+        var gradientStroke2 = ctx.createLinearGradient(500, 0,2100, 0);
+        gradientStroke2.addColorStop(0, '#80b6f4');
+        gradientStroke2.addColorStop(1, '#f49080');
+
+        var gradientFill1 = ctx.createLinearGradient(500, 0, 100, 0);
+        gradientFill1.addColorStop(0, "rgba(128, 182, 244, 0.6)");
+        gradientFill1.addColorStop(1, "rgba(0, 212, 255, 1)");
+
+        var gradientFill2 = ctx.createLinearGradient(500, 0, 100, 0);
+        gradientFill2.addColorStop(0, "rgba(1, 10, 122, 1)");
+        gradientFill2.addColorStop(1, "rgba(0, 212, 255, 1)");
+
+        var allStudent = new Chart(ctx, {
             type: 'line',
-            data: data,
-            options: {}
-        };
-
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
+            data: {
+                labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AGS", "SEP", "OKT", "NOV", "DEC"],
+                datasets: [
+                    {
+                        label: "Laki-laki",
+                        borderColor: gradientStroke1,
+                        pointBorderColor: gradientStroke1,
+                        pointBackgroundColor: gradientStroke1,
+                        pointHoverBackgroundColor: gradientStroke1,
+                        pointHoverBorderColor: gradientStroke1,
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 10,
+                        pointHoverBorderWidth: 1,
+                        pointRadius: 3,
+                        fill: true,
+                        backgroundColor: gradientFill1,
+                        borderWidth: 1,
+                        data: [100, 120, 150, 170, 180, 170, 160, 80, 30, 20, 129, 40]
+                    },
+                    {
+                        label: "Perempuan",
+                        borderColor: gradientStroke2,
+                        pointBorderColor: gradientStroke2,
+                        pointBackgroundColor: gradientStroke2,
+                        pointHoverBackgroundColor: gradientStroke2,
+                        pointHoverBorderColor: gradientStroke2,
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 10,
+                        pointHoverBorderWidth: 1,
+                        pointRadius: 3,
+                        fill: true,
+                        backgroundColor: gradientFill2,
+                        borderWidth: 1,
+                        data: [120, 140, 170, 190, 210, 100, 120, 170, 160, 80, 30, 20]
+                    },
+            ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                animation: {
+                    easing: 'easeInOutQuad',
+                    duration: 520
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: 'rgba(200, 200, 200, 0.05)',
+                            lineWidth: 1
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            color: 'rgba(200, 200, 200, 0.08)',
+                            lineWidth: 1
+                        }
+                    }]
+                },
+                elements: {
+                    line: {
+                        tension: 0.4
+                    }
+                },
+                legend: {
+                    display: false
+                },
+                point: {
+                    backgroundColor: 'white'
+                },
+                tooltips: {
+                    titleFontFamily: 'Open Sans',
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                    titleFontColor: 'red',
+                    caretSize: 5,
+                    cornerRadius: 2,
+                    xPadding: 10,
+                    yPadding: 10
+                },
+            }
+        });
     </script>
 @endpush

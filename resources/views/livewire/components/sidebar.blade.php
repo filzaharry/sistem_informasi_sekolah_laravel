@@ -17,7 +17,6 @@
                     <span class="nav-link">{{ $main->nama_menu }}</span>
                 </li>
                 @foreach ($sub_menu as $sub)
-                    {{-- <p class="text-light">{{ $sub->url }}</p> --}}
                     @if ($main->id == $sub->master_menu)
                         <div class="nav-item @if (Request::segment(1) == $sub->url) bg-dark @endif">
                             <a class="nav-link active" href="{{ route($sub->url) }}">
